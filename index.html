@@ -1,12 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anastasiya Lakhmakova</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="toolbar"></nav>
+
+    <main id="cv">
+      <header>
+        <h1 data-editable>Anastasiya Lakhmakova</h1>
+        <p class="job-title" data-editable>Job title</p>
+        <ul class="contacts">
+          <li data-editable>City</li>
+          <li><a href="mailto:anastasiya.lakhmakova@gmail.com" data-editable>anastasiya.lakhmakova@gmail.com</a></li>
+          <li><a href="tel:+46790000000" data-editable>+46 79 000 00 00</a></li>
+          <li><a href="ttps://linkedin.com/in/anastasiya-lakhmakova" data-editable>LinkedIn</a></li>
+          <li><a href="https://github.com/alakhmakova" data-editable>GitHub</a></li>
+        </ul>
+      </header>
+
+      <section data-section="about">
+        <h2 data-editable>About Me</h2>
+        <p data-editable>Short text about me</p>
+      </section>
+
+      <section data-section="skills">
+        <h2 data-editable>Skills</h2>
+        <dl>
+          <div data-block>
+            <dt data-editable>Category1</dt>
+            <dd data-editable>Skill, Skill, Skill</dd>
+            <dt data-editable>Category2</dt>
+            <dd data-editable>Skill, Skill, Skill</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section data-section="experience">
+        <h2 data-editable>Professional Experience</h2>
+        <article data-block>
+          <div class="entry-header">
+            <h3 data-editable>Job title</h3>
+            <p class="dates" data-editable>Start &ndash; End</p>
+          </div>
+          <p class="entry-place" data-editable>Company name, City</p>
+          <p class="entry-description" data-editable>Optional description</p>
+          <ul data-editable>
+            <li>Point</li>
+          </ul>
+        </article>
+      </section>
+
+      <section data-section="projects">
+        <h2 data-editable>Projects</h2>
+        <article data-block>
+          <div class="entry-header">
+            <h3 data-editable>Project name</h3>
+            <p class="dates" data-editable>Start &ndash; End</p>
+          </div>
+          <p class="entry-description" data-editable>Optional description</p>
+          <ul data-editable>
+            <li>Point</li>
+          </ul>
+        </article>
+      </section>
+
+      <section data-section="education">
+        <h2 data-editable>Education</h2>
+        <article data-block>
+          <div class="entry-header">
+            <h3 data-editable>Degree</h3>
+            <p class="dates" data-editable>Start &ndash; End</p>
+          </div>
+          <p class="entry-place" data-editable>School name, City</p>
+          <p class="entry-description" data-editable>Optional description</p>
+          <ul data-editable>
+            <li>Point</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
 </html>
