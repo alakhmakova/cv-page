@@ -86,6 +86,7 @@ a:focus-visible {
   z-index: 10;
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
   padding: 12px 16px;
   border-bottom: 1px solid var(--toolbar-border);
   background: var(--toolbar-bg);
@@ -95,7 +96,7 @@ a:focus-visible {
 /* inline-flex puts the icon and the text in one row;
    align-items: center centers them vertically; gap is the space
    between them. The box-shadow is a soft glow around the button. */
-.toolbar button {
+.toolbar .button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -107,14 +108,26 @@ a:focus-visible {
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
+  text-decoration: none;
   box-shadow: 0 0 20px rgba(38, 217, 202, 0.15);
   cursor: pointer;
 }
 
 /* Hover and keyboard focus: the button becomes slightly transparent. */
-.toolbar button:hover,
-.toolbar button:focus-visible {
+.toolbar .button:hover,
+.toolbar .button:focus-visible {
   opacity: 0.9;
+  text-decoration: none;
+}
+
+/* Secondary button: outlined, less visible than Download.
+   .button.secondary (no space) selects an element
+   that has both classes. */
+.toolbar .button.secondary {
+  border: 1px solid var(--toolbar-border);
+  background: none;
+  color: #7b899d;
+  box-shadow: none;
 }
 
 /* ---------- 4. CV sheet ---------- */
