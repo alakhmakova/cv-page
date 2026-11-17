@@ -45,6 +45,9 @@
         <li>Enter in a list: new bullet.</li>
         <li>Enter on an empty bullet: leave list.</li>
         <li>Web link: change its address in the box below it.</li>
+        <li>Buttons right of the sheet: hide a section, duplicate or delete a block.</li>
+        <li>Button above a contact: hide it.</li>
+        <li>Faded section or contact: hidden, not printed.</li>
         <li>Gray text is a hint, not printed.</li>
       </ul>
     </div>
@@ -56,6 +59,19 @@
     <label for="link-address">Link address</label>
     <input id="link-address" type="url" placeholder="https://" spellcheck="false">
     <button type="button">Save</button>
+  </div>
+  <!-- Buttons for sections, blocks and contacts (not part of the CV, not printed).
+       blocks.js moves them next to the section, block or contact under the mouse
+       or with the text cursor; "hidden" keeps them invisible until then. -->
+  <div id="section-controls" class="sheet-controls" hidden>
+    <button type="button">Hide section</button>
+  </div>
+  <div id="block-controls" class="sheet-controls" hidden>
+    <button type="button" data-action="duplicate-block">Duplicate</button>
+    <button type="button" data-action="delete-block">Delete</button>
+  </div>
+  <div id="contact-controls" class="sheet-controls" hidden>
+    <button type="button">Hide</button>
   </div>
   <main id="cv"></main>
   <!-- Blank CV: not shown by the browser. JS copies it onto the sheet. -->

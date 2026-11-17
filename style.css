@@ -305,6 +305,49 @@ a:focus-visible {
   opacity: 0.9;
 }
 
+/* Buttons for sections and blocks: a small row next to the sheet.
+   position: absolute places it in the page by the top and left that
+   blocks.js sets; z-index puts it above the sheet. */
+.sheet-controls {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  gap: 6px;
+}
+
+.sheet-controls[hidden] {
+  display: none;
+}
+
+.sheet-controls button {
+  padding: 4px 10px;
+  border: 1px solid var(--toolbar-border);
+  border-radius: 6px;
+  background: var(--toolbar-bg);
+  color: #e5e7eb;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sheet-controls button:hover {
+  border-color: var(--button-bg);
+  color: var(--button-bg);
+}
+
+/* Delete is red on hover: it removes the block. */
+.sheet-controls [data-action="delete-block"]:hover {
+  border-color: #f87171;
+  color: #f87171;
+}
+
+/* A disabled button (the last block of a section) looks faded and
+   does not react to the mouse. */
+.sheet-controls button:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 /* ---------- 4. CV sheet ---------- */
 #cv {
   max-width: var(--sheet-width);
@@ -527,6 +570,23 @@ a:focus-visible {
   display: none;
 }
 
+/* In the editor a hidden section or contact stays on the sheet, faded,
+   so it can be shown again. display: revert gives the element back the
+   browser's own display (block for a section, list-item for li).
+   #cv makes this rule stronger than .is-hidden; in the PDF the print
+   rule hides it completely. */
+.is-editing #cv .is-hidden {
+  display: revert;
+  opacity: 0.35;
+}
+
+/* The section or block that the hovered button will change. */
+.is-editing #cv .is-target {
+  background: rgba(38, 217, 202, 0.08);
+  box-shadow: 0 0 0 6px rgba(38, 217, 202, 0.08);
+  border-radius: 4px;
+}
+
 /* An empty optional description takes no space
    (except when body has the class is-editing). */
 body:not(.is-editing) .entry-description:empty {
@@ -656,6 +716,7 @@ body:not(.is-editing) .entry-description:empty {
   .toolbar,
   .editor-hint,
   .link-editor,
+  .sheet-controls,
   .editor-only,
   .is-hidden,
   .entry-description:empty,

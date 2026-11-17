@@ -2,6 +2,7 @@
 import { setupPrintButton } from "./print.js";
 import { setupKeyboardNavigation } from "./keyboard.js";
 import { setupLinkEditing } from "./links.js";
+import { setupBlockControls } from "./blocks.js";
 
 const sheet = document.querySelector("#cv");
 
@@ -45,4 +46,5 @@ loadBlankCv();
 enableEditing();
 setupKeyboardNavigation(sheet);
 setupLinkEditing(sheet);
+setupBlockControls(sheet);
 setupPrintButton();
