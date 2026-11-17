@@ -1,22 +1,110 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CV Editor</title>
-    <link rel="stylesheet" href="style.css" />
-    <script type="module" src="js/editor.js"></script>
-  </head>
-  <body>
-    <nav class="toolbar" aria-label="CV actions">
-      <a class="button secondary" href="index.html">Back to example</a>
-      <button type="button" class="button" data-action="print">
-        <!-- Download icon (inline SVG). aria-hidden: screen readers skip it,
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Editor</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="js/editor.js"></script>
+</head>
+
+<body class="is-editing">
+  <nav class="toolbar" aria-label="CV actions">
+    <a class="button secondary" href="index.html">Back to example</a>
+    <button type="button" class="button" data-action="print">
+      <!-- Download icon (inline SVG). aria-hidden: screen readers skip it,
              the button text already says what it does. -->
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-        Download PDF
-      </button>
-    </nav>
-    <main id="cv"></main>
-  </body>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      Download PDF
+    </button>
+  </nav>
+  <main id="cv"></main>
+  <!-- Blank CV: not shown by the browser. JS copies it onto the sheet. -->
+  <template id="blank-cv">
+    <header>
+      <h1 data-editable data-placeholder="Your Name"></h1>
+      <p class="job-title" data-editable data-placeholder="Job Title"></p>
+      <ul class="contacts">
+        <li data-editable data-placeholder="City, Country"></li>
+        <li><a href="tel:+46700000000" data-editable data-placeholder="+46 70 000 00 00"></a></li>
+        <li><a href="mailto:name@example.com" data-editable data-placeholder="name@example.com"></a></li>
+        <li><a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" data-editable>LinkedIn</a></li>
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer" data-editable>GitHub</a></li>
+      </ul>
+    </header>
+
+    <section data-section="about">
+      <h2 data-editable>About Me</h2>
+      <p data-editable data-placeholder="A short summary: who you are, what you do and what you are looking for."></p>
+    </section>
+
+    <section data-section="skills">
+      <h2 data-editable>Skills</h2>
+      <dl>
+        <div data-block>
+          <dt data-editable data-placeholder="Category"></dt>
+          <dd data-editable data-placeholder="Skill, Skill, Skill"></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section data-section="experience">
+      <h2 data-editable>Professional Experience</h2>
+      <article data-block>
+        <div class="entry-header">
+          <div>
+            <h3 data-editable data-placeholder="Job Title"></h3>
+            <span class="entry-place" data-editable data-placeholder="Company, City"></span>
+          </div>
+          <p class="dates" data-editable data-placeholder="Mon YYYY – Mon YYYY"></p>
+        </div>
+        <p class="entry-description" data-editable data-placeholder="Optional description"></p>
+        <ul data-editable>
+          <li data-placeholder="What you did and what you achieved."></li>
+        </ul>
+      </article>
+    </section>
+
+    <section data-section="projects">
+      <h2 data-editable>Projects</h2>
+      <article data-block>
+        <div class="entry-header">
+          <div>
+            <h3 data-editable data-placeholder="Project Name"></h3>
+          </div>
+          <p class="dates" data-editable data-placeholder="YYYY – Present"></p>
+        </div>
+        <p class="entry-link"><a href="https://github.com/" target="_blank" rel="noopener noreferrer" data-editable data-placeholder="github.com/username/project"></a></p>
+        <p class="entry-description" data-editable data-placeholder="What the project is."></p>
+        <ul data-editable>
+          <li data-placeholder="What you built and which technologies you used."></li>
+        </ul>
+      </article>
+    </section>
+
+    <section data-section="education">
+      <h2 data-editable>Education</h2>
+      <article data-block>
+        <div class="entry-header">
+          <div>
+            <h3 data-editable data-placeholder="Degree or Programme"></h3>
+            <span class="entry-place" data-editable data-placeholder="School, City"></span>
+          </div>
+          <p class="dates" data-editable data-placeholder="Mon YYYY – Mon YYYY"></p>
+        </div>
+        <p class="entry-description" data-editable data-placeholder="Optional description"></p>
+        <ul data-editable>
+          <li data-placeholder="What you studied."></li>
+        </ul>
+      </article>
+    </section>
+  </template>
+</body>
+
 </html>

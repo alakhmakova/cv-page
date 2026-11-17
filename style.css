@@ -355,6 +355,16 @@ body:not(.is-editing) .entry-description:empty {
   display: none;
 }
 
+/* In the editor, an empty editable element shows a gray hint taken
+   from its data-placeholder attribute. The hint is added by CSS:
+   it is not part of the text and is not printed.
+   ::after (not ::before), because some elements already use ::before:
+   the "|" separator of contacts and the " — " before the place. */
+.is-editing [data-placeholder]:empty::after {
+  content: attr(data-placeholder);
+  color: #aaaaaa;
+}
+
 /* ---------- 10. Responsive (mobile) ---------- */
 @media (max-width: 600px) {
   body {
