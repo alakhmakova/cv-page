@@ -1,6 +1,7 @@
 // Script for editor.html (the CV editor).
 import { setupPrintButton } from "./print.js";
 import { setupKeyboardNavigation } from "./keyboard.js";
+import { setupLinkEditing } from "./links.js";
 
 const sheet = document.querySelector("#cv");
 
@@ -43,4 +44,5 @@ sheet.addEventListener("input", (event) => {
 loadBlankCv();
 enableEditing();
 setupKeyboardNavigation(sheet);
+setupLinkEditing(sheet);
 setupPrintButton();

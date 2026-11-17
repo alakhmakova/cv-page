@@ -240,6 +240,71 @@ a:focus-visible {
   color: var(--accent);
 }
 
+/* Box for the address of a web link: a white card under the link.
+   position: absolute places it in the page by the top and left
+   that links.js sets; z-index puts it above the sheet. */
+.link-editor {
+  position: absolute;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--sheet-bg);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+}
+
+/* The hidden attribute does not work when display is set in CSS,
+   so it needs its own rule. */
+.link-editor[hidden] {
+  display: none;
+}
+
+/* width: 100% puts the label on its own line above the field. */
+.link-editor label {
+  width: 100%;
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+/* flex: 1 lets the field take all the space next to the button;
+   min-width: 0 lets it become narrower than its default width.
+   font: inherit: form fields do not take the page font by default. */
+.link-editor input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-body);
+  font: inherit;
+}
+
+.link-editor input:focus {
+  border-color: var(--accent);
+  outline: 1px solid var(--accent);
+}
+
+.link-editor button {
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.link-editor button:hover {
+  opacity: 0.9;
+}
+
 /* ---------- 4. CV sheet ---------- */
 #cv {
   max-width: var(--sheet-width);
@@ -590,6 +655,7 @@ body:not(.is-editing) .entry-description:empty {
      whose link inside is empty. */
   .toolbar,
   .editor-hint,
+  .link-editor,
   .editor-only,
   .is-hidden,
   .entry-description:empty,

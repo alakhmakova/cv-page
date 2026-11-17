@@ -44,10 +44,19 @@
         <li>Arrows: between fields and lines.</li>
         <li>Enter in a list: new bullet.</li>
         <li>Enter on an empty bullet: leave list.</li>
+        <li>Web link: change its address in the box below it.</li>
         <li>Gray text is a hint, not printed.</li>
       </ul>
     </div>
   </details>
+  <!-- Box for the address of a web link (not part of the CV, not
+       printed). links.js shows it under a web link that has the cursor;
+       "hidden" keeps it invisible until then. -->
+  <div id="link-editor" class="link-editor" hidden>
+    <label for="link-address">Link address</label>
+    <input id="link-address" type="url" placeholder="https://" spellcheck="false">
+    <button type="button">Save</button>
+  </div>
   <main id="cv"></main>
   <!-- Blank CV: not shown by the browser. JS copies it onto the sheet. -->
   <template id="blank-cv">
