@@ -7,34 +7,66 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav class="toolbar"></nav>
-
     <main id="cv">
       <header>
         <h1 data-editable>Anastasiya Lakhmakova</h1>
-        <p class="job-title" data-editable>Job title</p>
+        <p class="job-title" data-editable>Software Developer &amp; QA Engineer</p>
         <ul class="contacts">
-          <li data-editable>City</li>
-          <li><a href="mailto:anastasiya.lakhmakova@gmail.com" data-editable>anastasiya.lakhmakova@gmail.com</a></li>
+          <li data-editable>Malmö, Sweden</li>
+          <li><a href="mailto:email@gmail.com" data-editable>anastasiya.lakhmakova@gmail.com</a></li>
           <li><a href="tel:+46790000000" data-editable>+46 79 000 00 00</a></li>
-          <li><a href="ttps://linkedin.com/in/anastasiya-lakhmakova" data-editable>LinkedIn</a></li>
-          <li><a href="https://github.com/alakhmakova" data-editable>GitHub</a></li>
+          <!-- Web links open in a new tab (target="_blank"); rel="noopener noreferrer"
+               stops the new page from accessing this page. mailto: and tel: open an app. -->
+          <li><a href="https://linkedin.com/in/anastasiya-lakhmakova" target="_blank" rel="noopener noreferrer" data-editable>LinkedIn</a></li>
+          <li><a href="https://github.com/alakhmakova" target="_blank" rel="noopener noreferrer" data-editable>GitHub</a></li>
         </ul>
       </header>
 
       <section data-section="about">
         <h2 data-editable>About Me</h2>
-        <p data-editable>Short text about me</p>
+        <p data-editable>I am a structured, initiative-driven developer and QA engineer who completed the Systems Developer with Test Focus programme at JENSEN Yrkeshögskola Malmö in May 2026, seeking opportunities in Malmö, Lund, Helsingborg, or remotely.</p>
+        <p data-editable>My education combined systems development with a strong emphasis on testing — and my internships turned that foundation into real-world experience. At ZoCom I built a full-stack application across an unfamiliar tech stack, adapting quickly to .NET/C#, Docker, React, and GitHub Actions alongside Java/Spring Boot and PostgreSQL. At Squidler I tested an AI-driven end-to-end testing platform — finding and reporting bugs that were fixed during my internship, writing structured bug reports that were appreciated by the developers who worked with them directly, and producing a whitepaper on AI-driven web testing and vibe-coding that supported Squidler's partnership with Replit.</p>
+        <p data-editable>I have hands-on experience in manual testing, test automation, API testing, and CI/CD. I also work with AI tools — and understand where they fall short.</p>
       </section>
 
       <section data-section="skills">
         <h2 data-editable>Skills</h2>
         <dl>
           <div data-block>
-            <dt data-editable>Category1</dt>
-            <dd data-editable>Skill, Skill, Skill</dd>
-            <dt data-editable>Category2</dt>
-            <dd data-editable>Skill, Skill, Skill</dd>
+            <dt data-editable>Backend</dt>
+            <dd data-editable>Java, Spring Boot, .NET/C#, Kotlin, Ktor, REST API, GraphQL</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>Frontend</dt>
+            <dd data-editable>React, JavaScript, TypeScript, HTML, CSS, Tailwind CSS</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>Databases</dt>
+            <dd data-editable>PostgreSQL, MySQL, SQLite, MongoDB</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>QA &amp; Testing</dt>
+            <dd data-editable>Manual Testing, Exploratory Testing, Regression Testing, API Testing, Selenium, JUnit, Mockito, Squidler (AI), TDD, Postman</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>DevOps</dt>
+            <dd data-editable>Docker, Git, GitHub Actions, Jenkins, Linux/WSL, Nix</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>Documentation</dt>
+            <dd data-editable>Jira, Qase, Confluence, GitHub Project, Linear, ClickUp</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>Agile</dt>
+            <dd data-editable>Scrum, Kanban</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>AI</dt>
+            <dd data-editable>GitHub Copilot, Claude, Claude Code, Codex, Antigravity, Replit, Cursor, MCP, Agentic Workflows</dd>
+          </div>
+          <div data-block>
+            <dt data-editable>Languages</dt>
+            <dd data-editable>Swedish, English, Russian</dd>
           </div>
         </dl>
       </section>
@@ -43,13 +75,58 @@
         <h2 data-editable>Professional Experience</h2>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Job title</h3>
-            <p class="dates" data-editable>Start &ndash; End</p>
+            <h3 data-editable>QA Engineer (Internship)</h3>
+            <p class="dates" data-editable>Jan – Apr 2026</p>
           </div>
-          <p class="entry-place" data-editable>Company name, City</p>
-          <p class="entry-description" data-editable>Optional description</p>
+          <p class="entry-place" data-editable>Squidler AB, Malmö</p>
+          <p class="entry-description" data-editable>Squidler is an AI-driven, end-to-end testing platform designed to automate web application quality assurance.</p>
           <ul data-editable>
-            <li>Point</li>
+            <li>Performed manual and exploratory testing using Squidler's AI-powered platform and the Qase test management system.</li>
+            <li>Tested the platform's API and MCP integrations, and got acquainted with Kotlin, Ktor, GraphQL, and Linux/Nix environments.</li>
+            <li>Several of my improvement suggestions were implemented during the internship, including endpoint authorization testing in Squidler MCP and screenshot access directly within AI tools connected via MCP.</li>
+            <li>Was a key driver in producing a whitepaper on AI-driven web testing and vibe-coding that contributed to Squidler's partnership with Replit. Squidler is now an official MCP server for Replit users.</li>
+            <li>Gained hands-on exposure to AI agents and agentic workflows, including Claude Code.</li>
+          </ul>
+        </article>
+        <article data-block>
+          <div class="entry-header">
+            <h3 data-editable>Full-Stack Developer (Internship)</h3>
+            <p class="dates" data-editable>Oct – Dec 2025</p>
+          </div>
+          <p class="entry-place" data-editable>ZoCom, Remote</p>
+          <p class="entry-description" data-editable>Developed ZoPlanner, a schedule management application for teachers that consolidates information about schedules, assignments, and availability into a dynamic and user-friendly interface.</p>
+          <ul data-editable>
+            <li>Worked in an agile team and contributed across the full stack: a Spring Boot API layer for database access, a .NET/C# service handling business logic, and a React frontend, all communicating over a Docker network with PostgreSQL.</li>
+            <li>Adapted quickly to technologies new to me: .NET/C#, Docker, and GitHub Actions (CI/CD).</li>
+            <li>Configured the Docker network so that all services could interact seamlessly.</li>
+            <li>My supervisor described me as a valuable person for both the group and the product.</li>
+          </ul>
+        </article>
+        <article data-block>
+          <div class="entry-header">
+            <h3 data-editable>Software Tester</h3>
+            <p class="dates" data-editable>Jul 2022 – Oct 2023</p>
+          </div>
+          <p class="entry-place" data-editable>Quality Lab</p>
+          <p class="entry-description" data-editable></p>
+          <ul data-editable>
+            <li>Conducted manual functional, regression, and exploratory testing across web and mobile platforms.</li>
+            <li>Created test plans, test cases, checklists, and test result reports.</li>
+            <li>Identified and documented defects in Jira, and performed API testing using Postman.</li>
+            <li>Collaborated closely with developers and business analysts, and mentored new team members.</li>
+          </ul>
+        </article>
+        <article data-block>
+          <div class="entry-header">
+            <h3 data-editable>Administrator</h3>
+            <p class="dates" data-editable>Oct 2023 – Mar 2025</p>
+          </div>
+          <p class="entry-place" data-editable>Ariel Pole Studio AB, Malmö</p>
+          <p class="entry-description" data-editable></p>
+          <ul data-editable>
+            <li>Managed booking systems and maintained the website.</li>
+            <li>Handled customer support, scheduling, invoicing, payments, and payroll.</li>
+            <li>Gained experience in communication, problem-solving, and business operations.</li>
           </ul>
         </article>
       </section>
@@ -58,12 +135,17 @@
         <h2 data-editable>Projects</h2>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Project name</h3>
-            <p class="dates" data-editable>Start &ndash; End</p>
+            <h3 data-editable>Spira – Full-Stack Goal-Planning Platform</h3>
+            <p class="dates" data-editable>2025 – Present</p>
           </div>
-          <p class="entry-description" data-editable>Optional description</p>
+          <p class="entry-place"><a href="https://github.com/alakhmakova/spira-mindscape" target="_blank" rel="noopener noreferrer" data-editable>github.com/alakhmakova/spira-mindscape</a></p>
+          <p class="entry-description" data-editable>A web and Android app that helps users plan and reach their goals with AI, based on the GROW coaching model. Personal side project.</p>
           <ul data-editable>
-            <li>Point</li>
+            <li>Defined a clear MVP scope and deployed the product entirely on my own: Spring Boot 3/Java backend built with Maven, PostgreSQL database (Spring Data JPA, Flyway migrations), and React 19/TypeScript frontend.</li>
+            <li>Integrated external services: Google sign-in (OAuth2), Google Drive API, Firebase notifications, and AI providers' APIs.</li>
+            <li>Switched the database from MongoDB to PostgreSQL to use pgvector for RAG search, and rebuilt the API layer from REST to GraphQL after meeting it at Squidler, as it fits the hierarchical domain model (goal → sub-goal → resources) better.</li>
+            <li>Built a CI/CD pipeline in GitHub Actions with Docker: automated tests, dependency security scanning (npm audit, Trivy), and deployment to Google Cloud Run only when the tests are green and the scan is clean. Keyless GCP authentication via Workload Identity Federation.</li>
+            <li>Built broad test automation: JUnit 5, Spring GraphQL Test, Vitest, Playwright (E2E), and pytest, reported via JaCoCo and Allure.</li>
           </ul>
         </article>
       </section>
@@ -72,13 +154,21 @@
         <h2 data-editable>Education</h2>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Degree</h3>
-            <p class="dates" data-editable>Start &ndash; End</p>
+            <h3 data-editable>Systems Developer with Test Focus</h3>
+            <p class="dates" data-editable>Aug 2024 – May 2026</p>
           </div>
-          <p class="entry-place" data-editable>School name, City</p>
-          <p class="entry-description" data-editable>Optional description</p>
+          <p class="entry-place" data-editable>JENSEN Yrkeshögskola, Malmö</p>
+          <p class="entry-description" data-editable></p>
           <ul data-editable>
-            <li>Point</li>
+            <li>Core understanding of OOP concepts; design, development, and testing of Java-based applications</li>
+            <li>Debugging, troubleshooting, and resolving software issues</li>
+            <li>Integrating Java applications with relational databases; solid SQL fundamentals</li>
+            <li>Proficiency in Java frameworks: Spring Boot, Hibernate</li>
+            <li>Web development skills including HTML, CSS, and JavaScript</li>
+            <li>Version control with Git and CI/CD pipelines using GitHub Actions</li>
+            <li>Following the software development lifecycle within the Scrum framework</li>
+            <li>Authentication &amp; authorization; input validation (DDD); secure configuration and Principle of Least Privilege</li>
+            <li>Awareness of common security vulnerabilities: threats, risks, and OWASP Top 10</li>
           </ul>
         </article>
       </section>

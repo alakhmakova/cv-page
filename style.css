@@ -1,0 +1,291 @@
+/* =========================================================
+   CV page styles
+   1. Variables
+   2. Base
+   3. CV sheet
+   4. Header
+   5. Sections
+   6. Entries (experience, projects, education)
+   7. Skills
+   8. Hidden elements
+   9. Responsive (mobile)
+   10. Print
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
+
+/* ---------- 1. Variables ----------
+   All text sizes below use em, so they scale with --font-size.
+   em (named after the letter M, a typography unit equal to the
+   font size) = relative to font size: in font-size, 1em = the parent's
+   font size; in other properties (margin, padding), 1em = the
+   element's own font size. Example: inside #cv (13px), 2em = 26px. */
+:root {
+  --accent: #0d9488;
+  --text: #222222;
+  --text-muted: #555555;
+  --page-bg: #1a2332;
+  --sheet-bg: #ffffff;
+  --border: #d1d5db;
+
+  --font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  --font-size: 13px;
+  /* Unitless: inherited as a multiplier and recalculated
+     for every font size (1.5 x the element's own font-size). */
+  --line-height: 1.5;
+  --section-gap: 20px;
+
+  /* A4 width at 96 dpi; 57px side padding leaves ~680px of text,
+     the same text width as A4 printed with 15mm margins. */
+  --sheet-width: 794px;
+  --sheet-padding: 48px 57px;
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: var(--font-family);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+/* ---------- 3. CV sheet ---------- */
+#cv {
+  max-width: var(--sheet-width);
+  margin: 32px auto;
+  padding: var(--sheet-padding);
+  background: var(--sheet-bg);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+#cv p,
+#cv ul,
+#cv dl {
+  margin: 0;
+}
+
+/* Space between paragraphs that follow each other (About Me). */
+#cv section > p + p {
+  margin-top: 0.6em;
+}
+
+/* ---------- 4. Header ---------- */
+#cv h1 {
+  margin: 0;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111111;
+}
+
+.job-title {
+  margin-top: 2px;
+  font-size: 1.15em;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Flexbox puts the contact items in one row (by default ul shows
+   them one under another). flex-wrap: wrap moves items that do not
+   fit to the next line instead of squeezing them.
+   gap: 6px between pills, both between lines and inside a line. */
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92em;
+  color: var(--text-muted);
+}
+
+/* Each contact is a pill: a small box with slightly rounded corners. */
+.contacts li {
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #f3f4f6;
+}
+
+/* ---------- 5. Sections ---------- */
+#cv section {
+  margin-top: var(--section-gap);
+}
+
+#cv h2 {
+  margin: 0 0 10px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--accent);
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+/* ---------- 6. Entries (experience, projects, education) ---------- */
+#cv article + article {
+  margin-top: 12px;
+}
+
+/* Flexbox puts the title and the dates in one row.
+   justify-content: space-between pushes the title to the left edge
+   and the dates to the right edge.
+   align-items: baseline aligns their text on one line, even though
+   the title and the dates have different font sizes. */
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+#cv h3 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+/* flex-shrink: 0 keeps the dates from being squeezed when the title
+   is long; the title wraps instead. */
+.dates {
+  flex-shrink: 0;
+  font-size: 0.92em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.entry-place {
+  color: var(--text-muted);
+}
+
+.entry-description {
+  margin-top: 4px;
+}
+
+#cv article ul {
+  margin-top: 4px;
+  padding-left: 1.2em;
+}
+
+/* ---------- 7. Skills ---------- */
+/* Grid: each category row has two columns, 140px for the category (dt)
+   and the rest of the width (1fr) for the skills (dd). */
+#cv dl > div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px;
+  padding: 3px 0;
+}
+
+#cv dt {
+  font-weight: 700;
+}
+
+#cv dd {
+  margin: 0;
+}
+
+/* ---------- 8. Hidden elements ----------
+   A section with the class is-hidden is not shown. */
+.is-hidden {
+  display: none;
+}
+
+/* Elements with the class editor-only are not shown. */
+.editor-only {
+  display: none;
+}
+
+/* An empty optional description takes no space
+   (except when body has the class is-editing). */
+body:not(.is-editing) .entry-description:empty {
+  display: none;
+}
+
+/* ---------- 9. Responsive (mobile) ---------- */
+@media (max-width: 600px) {
+  body {
+    background: var(--sheet-bg);
+  }
+
+  #cv {
+    margin: 0;
+    padding: 24px 16px;
+  }
+
+  /* flex-direction: column stacks the title and the dates
+     vertically: dates go under the title on narrow screens. */
+  .entry-header {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* One grid column: the category goes above its skills. */
+  #cv dl > div {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 4px 0;
+  }
+}
+
+/* ---------- 10. Print ----------
+   A4 page with 15mm margins. To get a PDF: Ctrl+P, "Save as PDF",
+   headers and footers turned off. */
+@page {
+  size: A4;
+  margin: 15mm;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+
+  /* !important: these elements are never printed,
+     regardless of any other rule that shows them. */
+  .editor-only,
+  .is-hidden,
+  .entry-description:empty {
+    display: none !important;
+  }
+
+  #cv {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #cv article,
+  #cv dl > div {
+    break-inside: avoid;
+  }
+
+  #cv h2 {
+    break-after: avoid;
+  }
+
+  /* Keep the accent color in the PDF. */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
