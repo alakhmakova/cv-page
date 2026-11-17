@@ -11,6 +11,27 @@
 
 <body class="is-editing">
   <nav class="toolbar" aria-label="CV actions">
+    <!-- The user's CVs (cv-list.js fills the list from localStorage):
+         choose a CV, rename the open one, create, duplicate, delete. -->
+    <div class="cv-list">
+      <span class="cv-list-title">My CVs</span>
+      <!-- Own drop-down list: a button with the name of the open CV and
+           a list under it (filled by cv-list.js), hidden until a click. -->
+      <div class="cv-picker">
+        <button type="button" id="cv-picker-button" class="cv-picker-button" aria-haspopup="true" aria-expanded="false">
+          <span id="cv-picker-label"></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <ul id="cv-picker-list" class="cv-picker-list" hidden></ul>
+      </div>
+      <input id="cv-name" type="text" aria-label="CV name" spellcheck="false">
+      <button type="button" class="button secondary" data-action="new-cv">New</button>
+      <button type="button" class="button secondary" data-action="duplicate-cv">Duplicate</button>
+      <button type="button" class="button secondary" data-action="delete-cv">Delete</button>
+    </div>
     <a class="button secondary" href="index.html">Back to example</a>
     <button type="button" class="button" data-action="print">
       <!-- Download icon (inline SVG). aria-hidden: screen readers skip it,
@@ -39,6 +60,7 @@
       <p class="editor-hint-title">How to edit</p>
       <ul>
         <li>Click any text to edit it.</li>
+        <li>Changes are saved in this browser automatically.</li>
         <li>Tab or Enter: next field.</li>
         <li>Shift+Tab: previous field.</li>
         <li>Arrows: between fields and lines.</li>
@@ -73,6 +95,18 @@
   <div id="contact-controls" class="sheet-controls" hidden>
     <button type="button">Hide</button>
   </div>
+  <!-- Confirmation window (confirm-dialog.js opens it with showModal()).
+       The inner div holds the content, so a click on the dimmed page
+       around it can be told apart from a click inside it. -->
+  <dialog id="confirm-dialog" class="confirm-dialog">
+    <div class="confirm-dialog-box">
+      <p class="confirm-dialog-text"></p>
+      <div class="confirm-dialog-actions">
+        <button type="button" data-answer="cancel">Cancel</button>
+        <button type="button" data-answer="ok">OK</button>
+      </div>
+    </div>
+  </dialog>
   <main id="cv"></main>
   <!-- Blank CV: not shown by the browser. JS copies it onto the sheet. -->
   <template id="blank-cv">

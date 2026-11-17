@@ -3,25 +3,9 @@ import { setupPrintButton } from "./print.js";
 import { setupKeyboardNavigation } from "./keyboard.js";
 import { setupLinkEditing } from "./links.js";
 import { setupBlockControls } from "./blocks.js";
+import { setupCvList } from "./cv-list.js";
 
 const sheet = document.querySelector("#cv");
-
-// Replaces the content of the CV sheet with a copy of the blank template.
-function loadBlankCv() {
-  const template = document.querySelector("#blank-cv");
-  const copy = template.content.cloneNode(true);
-
-  sheet.replaceChildren(copy);
-}
-
-// Makes every element with data-editable on the sheet editable by click.
-function enableEditing() {
-  const editables = sheet.querySelectorAll("[data-editable]");
-
-  for (const element of editables) {
-    element.contentEditable = "true";
-  }
-}
 
 // Pasting inserts plain text only, without fonts and colors
 // copied from Word or a web page.
@@ -42,8 +26,7 @@ sheet.addEventListener("input", (event) => {
   }
 });
 
-loadBlankCv();
-enableEditing();
+setupCvList(sheet);
 setupKeyboardNavigation(sheet);
 setupLinkEditing(sheet);
 setupBlockControls(sheet);

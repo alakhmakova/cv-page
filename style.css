@@ -132,6 +132,221 @@ a:focus-visible {
   box-shadow: none;
 }
 
+/* The list of CVs on the left side of the toolbar.
+   margin-right: auto takes all free space to the right of the group,
+   so the group stays on the left and the other buttons on the right.
+   flex-wrap lets it go onto two lines in a narrow window. */
+.cv-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+}
+
+/* Own drop-down list of CVs. position: relative on the wrapper is the
+   anchor for the list, which is placed under the button with
+   position: absolute. */
+.cv-picker {
+  position: relative;
+}
+
+/* The button with the name of the open CV and an arrow. */
+.cv-picker-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 220px;
+  padding: 5px 12px;
+  border: 1px solid var(--toolbar-border);
+  border-radius: 10px;
+  background: var(--page-bg);
+  color: #e5e7eb;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* A long name is cut with "..." instead of making the button wider. */
+.cv-picker-button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cv-picker-button:hover,
+.cv-picker-button[aria-expanded="true"] {
+  border-color: var(--button-bg);
+}
+
+/* The arrow turns upside down while the list is open. */
+.cv-picker-button[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* The list: a dark card under the button. */
+.cv-picker-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  min-width: 100%;
+  max-height: 320px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--toolbar-border);
+  border-radius: 10px;
+  background: #15181e;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  list-style: none;
+}
+
+.cv-picker-list[hidden] {
+  display: none;
+}
+
+/* One CV in the list: a button across the whole width. */
+.cv-picker-list button {
+  display: block;
+  width: 100%;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: #e5e7eb;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cv-picker-list button:hover,
+.cv-picker-list button:focus-visible {
+  background: rgba(38, 217, 202, 0.12);
+  outline: none;
+}
+
+/* The open CV is shown in the accent colour. */
+.cv-picker-list button.is-current {
+  color: var(--button-bg);
+  font-weight: 500;
+}
+
+/* Confirmation window: a white card in the middle of the window.
+   The dialog itself has no padding, so its inner box fills it. */
+.confirm-dialog {
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: var(--sheet-bg);
+  color: var(--text-body);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ::backdrop is the layer behind an open modal dialog: it dims and
+   blurs the page. */
+.confirm-dialog::backdrop {
+  background: rgba(14, 17, 21, 0.7);
+  backdrop-filter: blur(3px);
+}
+
+.confirm-dialog-box {
+  padding: 24px;
+}
+
+.confirm-dialog-text {
+  margin: 0 0 20px;
+  color: var(--text-heading);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* The buttons on the right, Cancel first. */
+.confirm-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.confirm-dialog-actions button {
+  padding: 7px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: none;
+  color: var(--text-body);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.confirm-dialog-actions button:hover {
+  background: #f3f4f6;
+}
+
+/* OK (here: Delete) is red, because it removes data. */
+.confirm-dialog-actions [data-answer="ok"] {
+  border-color: #dc2626;
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.confirm-dialog-actions [data-answer="ok"]:hover {
+  background: #b91c1c;
+}
+
+.confirm-dialog-actions button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* In a narrow window the toolbar wraps: the CV list takes a whole line
+   and the other buttons go to the next line. */
+@media (max-width: 900px) {
+  .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .cv-list {
+    width: 100%;
+  }
+
+  .cv-list input {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.cv-list-title {
+  color: #7b899d;
+  font-size: 14px;
+}
+
+/* The name field looks like the dark toolbar.
+   font: inherit: form fields do not take the page font by default. */
+.cv-list input {
+  padding: 5px 10px;
+  border: 1px solid var(--toolbar-border);
+  border-radius: 10px;
+  background: var(--page-bg);
+  color: #e5e7eb;
+  font: inherit;
+  font-size: 14px;
+}
+
+.cv-list input {
+  width: 180px;
+}
+
+.cv-list input:focus {
+  border-color: var(--button-bg);
+  outline: none;
+}
+
 /* Help button (editor only): a round "?" button fixed in the bottom
    right corner. position: fixed keeps it there while the page scrolls;
    z-index puts it above the sheet. */
