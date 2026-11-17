@@ -23,6 +23,8 @@
    element's own font size. Example: inside #cv (13px), 2em = 26px. */
 :root {
   --accent: #0d9488;
+  --accent-dark: #0a756b;
+  --edit-highlight: rgba(38, 217, 202, 0.18); /* --button-bg, see-through */
   --text: #222222;
   --text-heading: #111111;
   --text-body: #333333;
@@ -130,6 +132,114 @@ a:focus-visible {
   box-shadow: none;
 }
 
+/* Help button (editor only): a round "?" button fixed in the bottom
+   right corner. position: fixed keeps it there while the page scrolls;
+   z-index puts it above the sheet. */
+.editor-hint {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+}
+
+/* The button itself. list-style: none removes the small triangle that
+   browsers draw before a summary; the ::-webkit-details-marker rule
+   does the same in Safari. border-radius: 50% makes a square a circle.
+   position: relative is the anchor for the tooltip below. */
+.editor-hint summary {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 24px;
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.editor-hint summary::-webkit-details-marker {
+  display: none;
+}
+
+.editor-hint summary:hover {
+  filter: brightness(1.1);
+}
+
+.editor-hint summary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Tooltip "How to edit" to the left of the button. It is invisible
+   (opacity: 0) and appears on hover. pointer-events: none: the mouse
+   ignores it, so it never covers anything. Not shown while the list
+   is open: the list has the same title. */
+.editor-hint-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--sheet-bg);
+  color: var(--text-heading);
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.editor-hint summary:hover .editor-hint-tooltip {
+  opacity: 1;
+}
+
+.editor-hint[open] .editor-hint-tooltip {
+  display: none;
+}
+
+/* Drop-up list: a white card that opens above the button.
+   bottom: 100% puts its lower edge at the top of .editor-hint,
+   plus 12px of space; right: 0 lines it up with the button. */
+.editor-hint-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: max-content;
+  max-width: calc(100vw - 48px);
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: var(--sheet-bg);
+  color: var(--text-body);
+  font-size: 16px;
+  line-height: 1.6;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+.editor-hint-title {
+  margin: 0 0 8px;
+  color: var(--text-heading);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.editor-hint-panel ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Bullet points in the accent colour. */
+.editor-hint-panel li::marker {
+  color: var(--accent);
+}
+
 /* ---------- 4. CV sheet ---------- */
 #cv {
   max-width: var(--sheet-width);
@@ -189,8 +299,11 @@ a:focus-visible {
   flex-wrap: wrap;
   gap: 4px 16px;
   overflow: hidden;
-  margin-top: 10px;
-  padding: 0;
+  /* 4px padding on every side leaves room for the frame of an editable
+     contact (overflow: hidden would cut it off); the negative margin
+     moves the list back by the same 4px, so the text stays in place. */
+  margin: 6px -4px -4px;
+  padding: 4px;
   list-style: none;
   font-size: 0.92em;
   color: var(--text-muted);
@@ -365,6 +478,70 @@ body:not(.is-editing) .entry-description:empty {
   color: #aaaaaa;
 }
 
+/* Editable fields: on hover the field gets a light see-through
+   turquoise background (the Download PDF colour).
+   box-shadow with a spread (the 4th value) paints the same
+   colour 3px around the field, so the text does not touch the edge;
+   like outline, it does not take space, so the text does not move.
+   border-radius rounds the corners of the background and the shadow.
+   The field you are typing in (:focus) keeps the same background,
+   even when the mouse leaves it.
+   Not for section headings (h2): their bottom line would get
+   rounded ends. */
+.is-editing [contenteditable]:not(h2) {
+  border-radius: 4px;
+}
+
+.is-editing [contenteditable]:hover,
+.is-editing [contenteditable]:focus {
+  background: var(--edit-highlight);
+  box-shadow: 0 0 0 3px var(--edit-highlight);
+}
+
+/* The same mouse pointer over the whole CV sheet: a pencil, also in
+   the gaps between fields. Without this rule the browser picks it
+   itself: a text cursor (I) over text, an arrow over empty fields and
+   gaps, and a hand over links. The image is assets/pencil-cursor.svg
+   (Edit icon by Side Project from Noun Project, CC BY 3.0).
+   "1 1" is the point that clicks: the tip of the pencil, 1px from the
+   left and 1px from the top of the 28x28 image. "text" after the comma
+   is the fallback if the image fails to load.
+   #cv * covers every element inside the sheet, because links and
+   some other elements set their own cursor and do not inherit it. */
+.is-editing #cv,
+.is-editing #cv * {
+  cursor: url("assets/pencil-cursor.svg") 1 1, text;
+}
+
+/* In the field you are typing in (it has the blinking text cursor)
+   the mouse pointer is the usual text cursor (I), not the pencil.
+   This selector has more classes than #cv *, so it wins. */
+.is-editing #cv [contenteditable]:focus,
+.is-editing #cv [contenteditable]:focus * {
+  cursor: text;
+}
+
+/* An empty inline field (a link, the h3 title, the place span) has no
+   box of its own, so the browser does not draw the text cursor in it.
+   inline-block gives it a box while it is empty; as soon as it has
+   text, :empty no longer matches and it is inline again.
+   #cv is needed to beat the #cv h3 { display: inline } rule. */
+.is-editing #cv :is(a, span, h3)[contenteditable]:empty {
+  display: inline-block;
+}
+
+/* Links on the sheet are not underlined while editing:
+   there they are text fields, not links to click. */
+.is-editing #cv a:hover,
+.is-editing #cv a:focus-visible {
+  text-decoration: none;
+}
+
+/* While typing there is no frame, only the text cursor. */
+.is-editing [contenteditable]:focus {
+  outline: none;
+}
+
 /* ---------- 10. Responsive (mobile) ---------- */
 @media (max-width: 600px) {
   body {
@@ -407,12 +584,32 @@ body:not(.is-editing) .entry-description:empty {
   }
 
   /* !important: these elements are never printed,
-     regardless of any other rule that shows them. */
+     regardless of any other rule that shows them.
+     Empty fields are not printed either: an empty place (no " — "),
+     an empty contact (no extra "|"). li:has(> a:empty) selects an li
+     whose link inside is empty. */
   .toolbar,
+  .editor-hint,
   .editor-only,
   .is-hidden,
-  .entry-description:empty {
+  .entry-description:empty,
+  .entry-place:empty,
+  .contacts li:empty,
+  .contacts li:has(> a:empty) {
     display: none !important;
+  }
+
+  /* No gray hints of empty fields in the PDF. */
+  [data-placeholder]:empty::after {
+    content: none !important;
+  }
+
+  /* No editing frames or background in the PDF: the field with the
+     cursor would otherwise be printed with the turquoise background. */
+  [contenteditable] {
+    outline: none !important;
+    background: none !important;
+    box-shadow: none !important;
   }
 
   /* The page margins come from @page, so the sheet's own padding

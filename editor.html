@@ -24,6 +24,30 @@
       Download PDF
     </button>
   </nav>
+  <!-- How to use the editor (not part of the CV, not printed).
+       details + summary: summary is the round "?" button in the
+       bottom right corner; a click on it opens or closes the list
+       above it, without JavaScript. The span is the tooltip shown
+       on hover. aria-label gives screen readers a name for the button
+       instead of a lone "?". -->
+  <details class="editor-hint">
+    <summary aria-label="How to edit">
+      ?
+      <span class="editor-hint-tooltip">How to edit</span>
+    </summary>
+    <div class="editor-hint-panel">
+      <p class="editor-hint-title">How to edit</p>
+      <ul>
+        <li>Click any text to edit it.</li>
+        <li>Tab or Enter: next field.</li>
+        <li>Shift+Tab: previous field.</li>
+        <li>Arrows: between fields and lines.</li>
+        <li>Enter in a list: new bullet.</li>
+        <li>Enter on an empty bullet: leave list.</li>
+        <li>Gray text is a hint, not printed.</li>
+      </ul>
+    </div>
+  </details>
   <main id="cv"></main>
   <!-- Blank CV: not shown by the browser. JS copies it onto the sheet. -->
   <template id="blank-cv">
