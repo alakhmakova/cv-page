@@ -2,14 +2,15 @@
    CV page styles
    1. Variables
    2. Base
-   3. CV sheet
-   4. Header
-   5. Sections
-   6. Entries (experience, projects, education)
-   7. Skills
-   8. Hidden elements
-   9. Responsive (mobile)
-   10. Print
+   3. Toolbar
+   4. CV sheet
+   5. Header
+   6. Sections
+   7. Entries (experience, projects, education)
+   8. Skills
+   9. Hidden elements
+   10. Responsive (mobile)
+   11. Print
    ========================================================= */
 
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
@@ -23,10 +24,19 @@
 :root {
   --accent: #0d9488;
   --text: #222222;
+  --text-heading: #111111;
+  --text-body: #333333;
+  --text-soft: #444444;
   --text-muted: #555555;
-  --page-bg: #1a2332;
+  --page-bg: #0e1115;
   --sheet-bg: #ffffff;
-  --border: #d1d5db;
+  --border: #cccccc;
+
+  /* Toolbar (screen only) */
+  --toolbar-bg: rgba(21, 24, 30, 0.9);
+  --toolbar-border: #272b35;
+  --button-bg: #26d9ca;
+  --button-text: #0e1115;
 
   --font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
   --font-size: 13px;
@@ -65,7 +75,49 @@ a:focus-visible {
   text-decoration: underline;
 }
 
-/* ---------- 3. CV sheet ---------- */
+/* ---------- 3. Toolbar ----------
+   A bar across the whole window. position: sticky keeps it at the
+   top of the window while the page scrolls; z-index keeps it above
+   the CV sheet. backdrop-filter blurs the page behind the
+   semi-transparent background. */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--toolbar-border);
+  background: var(--toolbar-bg);
+  backdrop-filter: blur(12px);
+}
+
+/* inline-flex puts the icon and the text in one row;
+   align-items: center centers them vertically; gap is the space
+   between them. The box-shadow is a soft glow around the button. */
+.toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 0 20px rgba(38, 217, 202, 0.15);
+  cursor: pointer;
+}
+
+/* Hover and keyboard focus: the button becomes slightly transparent. */
+.toolbar button:hover,
+.toolbar button:focus-visible {
+  opacity: 0.9;
+}
+
+/* ---------- 4. CV sheet ---------- */
 #cv {
   max-width: var(--sheet-width);
   margin: 32px auto;
@@ -75,10 +127,21 @@ a:focus-visible {
   line-height: var(--line-height);
 }
 
+/* Removes the default browser margins. The selector has an id (#cv),
+   which is stronger than a class, so a rule that sets a margin on
+   one of these elements by class must also start with #cv
+   (for example #cv .job-title), otherwise this rule wins. */
 #cv p,
 #cv ul,
 #cv dl {
   margin: 0;
+}
+
+/* About Me paragraphs: 12.5px (0.96 x 13px), a bit more line spacing. */
+#cv section > p {
+  font-size: 0.96em;
+  line-height: 1.6;
+  color: var(--text-body);
 }
 
 /* Space between paragraphs that follow each other (About Me). */
@@ -86,16 +149,16 @@ a:focus-visible {
   margin-top: 0.6em;
 }
 
-/* ---------- 4. Header ---------- */
+/* ---------- 5. Header ---------- */
 #cv h1 {
   margin: 0;
   font-size: 2em;
   font-weight: 700;
-  line-height: 1.2;
-  color: #111111;
+  letter-spacing: -0.5px;
+  color: var(--text-heading);
 }
 
-.job-title {
+#cv .job-title {
   margin-top: 2px;
   font-size: 1.15em;
   font-weight: 500;
@@ -105,11 +168,14 @@ a:focus-visible {
 /* Flexbox puts the contact items in one row (by default ul shows
    them one under another). flex-wrap: wrap moves items that do not
    fit to the next line instead of squeezing them.
-   gap: 6px between pills, both between lines and inside a line. */
-.contacts {
+   gap: 4px between lines, 16px between items in a line.
+   overflow: hidden cuts off anything outside the list box
+   (used to hide separators at the start of a line, see below). */
+#cv .contacts {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px 16px;
+  overflow: hidden;
   margin-top: 10px;
   padding: 0;
   list-style: none;
@@ -117,15 +183,34 @@ a:focus-visible {
   color: var(--text-muted);
 }
 
-/* Each contact is a pill: a small box with slightly rounded corners. */
+/* A "|" separator in the gap to the left of every contact.
+   ::before adds it inside the li, before its content; it is added by
+   CSS, so it is not part of the HTML text.
+   position: absolute with left: -10px moves it 10px to the left of
+   the li, into the 16px gap (position: relative on the li makes the
+   li the starting point for left). A contact that starts a line
+   stands at the left edge of the list, so its separator falls outside
+   the list box and overflow: hidden cuts it off. This way no line
+   starts with a separator, including the first one. */
 .contacts li {
-  padding: 2px 8px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: #f3f4f6;
+  position: relative;
 }
 
-/* ---------- 5. Sections ---------- */
+.contacts li::before {
+  content: "|";
+  position: absolute;
+  left: -10px;
+  color: var(--border);
+}
+
+/* The phone number has the same gray color as the city, like the
+   original design; only web and email links use the accent color.
+   a[href^="tel:"] selects a link whose href starts with "tel:". */
+.contacts a[href^="tel:"] {
+  color: inherit;
+}
+
+/* ---------- 6. Sections ---------- */
 #cv section {
   margin-top: var(--section-gap);
 }
@@ -138,30 +223,36 @@ a:focus-visible {
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #111111;
+  color: var(--text-heading);
 }
 
-/* ---------- 6. Entries (experience, projects, education) ---------- */
+/* ---------- 7. Entries (experience, projects, education) ---------- */
 #cv article + article {
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
-/* Flexbox puts the title and the dates in one row.
-   justify-content: space-between pushes the title to the left edge
-   and the dates to the right edge.
+/* Flexbox puts two items in one row: the left div (title and place)
+   and the dates. justify-content: space-between pushes the first one
+   to the left edge and the dates to the right edge.
    align-items: baseline aligns their text on one line, even though
-   the title and the dates have different font sizes. */
+   they have different font sizes. */
 .entry-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 16px;
+  gap: 12px;
+  margin-bottom: 3px;
 }
 
+/* display: inline keeps the title and the place on the same line
+   (a heading is a block by default and would take a whole line).
+   The text moves to the next line only when it does not fit. */
 #cv h3 {
+  display: inline;
   margin: 0;
   font-size: 1em;
   font-weight: 700;
+  color: var(--text-heading);
 }
 
 /* flex-shrink: 0 keeps the dates from being squeezed when the title
@@ -169,42 +260,72 @@ a:focus-visible {
 .dates {
   flex-shrink: 0;
   font-size: 0.92em;
+  font-weight: 500;
   color: var(--accent);
   white-space: nowrap;
 }
 
+/* Company and city after the title. The dash is added by CSS,
+   so the editable text holds only the place itself. */
 .entry-place {
+  font-size: 0.96em;
   color: var(--text-muted);
 }
 
-.entry-description {
-  margin-top: 4px;
+.entry-place::before {
+  content: " — ";
+}
+
+/* Project link: its own line under the title. */
+#cv .entry-link {
+  font-size: 0.96em;
+}
+
+/* Description and bullet points: 12px (0.92 x 13px). */
+#cv .entry-description {
+  margin-top: 2px;
+  font-size: 0.92em;
+  line-height: 1.55;
+  color: var(--text-soft);
 }
 
 #cv article ul {
   margin-top: 4px;
-  padding-left: 1.2em;
+  padding-left: 18px;
+  font-size: 0.92em;
+  color: var(--text-soft);
 }
 
-/* ---------- 7. Skills ---------- */
-/* Grid: each category row has two columns, 140px for the category (dt)
-   and the rest of the width (1fr) for the skills (dd). */
+#cv article li + li {
+  margin-top: 2px;
+}
+
+/* ---------- 8. Skills ---------- */
+#cv dl {
+  font-size: 0.96em;
+}
+
+/* Grid: each category row has two columns, 130px for the category (dt)
+   and the rest of the width (1fr) for the skills (dd);
+   gap: 16px between the columns. */
 #cv dl > div {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 8px;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
   padding: 3px 0;
 }
 
 #cv dt {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--text-heading);
 }
 
 #cv dd {
   margin: 0;
+  color: var(--text-body);
 }
 
-/* ---------- 8. Hidden elements ----------
+/* ---------- 9. Hidden elements ----------
    A section with the class is-hidden is not shown. */
 .is-hidden {
   display: none;
@@ -221,7 +342,7 @@ body:not(.is-editing) .entry-description:empty {
   display: none;
 }
 
-/* ---------- 9. Responsive (mobile) ---------- */
+/* ---------- 10. Responsive (mobile) ---------- */
 @media (max-width: 600px) {
   body {
     background: var(--sheet-bg);
@@ -247,7 +368,7 @@ body:not(.is-editing) .entry-description:empty {
   }
 }
 
-/* ---------- 10. Print ----------
+/* ---------- 11. Print ----------
    A4 page with 15mm margins. To get a PDF: Ctrl+P, "Save as PDF",
    headers and footers turned off. */
 @page {
@@ -255,6 +376,8 @@ body:not(.is-editing) .entry-description:empty {
   margin: 15mm;
 }
 
+/* Rules inside @media print apply only when printing;
+   they have no effect on the screen. */
 @media print {
   body {
     background: none;
@@ -262,24 +385,33 @@ body:not(.is-editing) .entry-description:empty {
 
   /* !important: these elements are never printed,
      regardless of any other rule that shows them. */
+  .toolbar,
   .editor-only,
   .is-hidden,
   .entry-description:empty {
     display: none !important;
   }
 
+  /* The page margins come from @page, so the sheet's own padding
+     is removed; otherwise the margins would be doubled. */
   #cv {
     max-width: none;
     margin: 0;
     padding: 0;
   }
 
-  #cv article,
+  /* break-inside: avoid keeps one bullet point (li) or one skills row
+     on a single page instead of cutting it between two pages. */
+  #cv li,
   #cv dl > div {
     break-inside: avoid;
   }
 
-  #cv h2 {
+  /* break-after: avoid keeps a heading on the same page as the content
+     right after it, so it is not left alone at the page bottom. */
+  #cv h2,
+  .entry-header,
+  .entry-description {
     break-after: avoid;
   }
 

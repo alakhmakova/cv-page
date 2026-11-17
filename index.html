@@ -5,16 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anastasiya Lakhmakova</title>
     <link rel="stylesheet" href="style.css" />
+    <script type="module" src="js/main.js"></script>
   </head>
   <body>
+    <nav class="toolbar" aria-label="CV actions">
+      <button type="button" data-action="print">
+        <!-- Download icon (inline SVG). aria-hidden: screen readers skip it,
+             the button text already says what it does. -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+        Download PDF
+      </button>
+    </nav>
     <main id="cv">
       <header>
         <h1 data-editable>Anastasiya Lakhmakova</h1>
         <p class="job-title" data-editable>Software Developer &amp; QA Engineer</p>
         <ul class="contacts">
           <li data-editable>Malmö, Sweden</li>
-          <li><a href="mailto:email@gmail.com" data-editable>anastasiya.lakhmakova@gmail.com</a></li>
           <li><a href="tel:+46790000000" data-editable>+46 79 000 00 00</a></li>
+          <li><a href="mailto:email@gmail.com" data-editable>email@gmail.com</a></li>
           <!-- Web links open in a new tab (target="_blank"); rel="noopener noreferrer"
                stops the new page from accessing this page. mailto: and tel: open an app. -->
           <li><a href="https://linkedin.com/in/anastasiya-lakhmakova" target="_blank" rel="noopener noreferrer" data-editable>LinkedIn</a></li>
@@ -75,10 +84,12 @@
         <h2 data-editable>Professional Experience</h2>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>QA Engineer (Internship)</h3>
+            <div>
+              <h3 data-editable>QA Engineer (Internship)</h3>
+              <span class="entry-place" data-editable>Squidler AB, Malmö</span>
+            </div>
             <p class="dates" data-editable>Jan – Apr 2026</p>
           </div>
-          <p class="entry-place" data-editable>Squidler AB, Malmö</p>
           <p class="entry-description" data-editable>Squidler is an AI-driven, end-to-end testing platform designed to automate web application quality assurance.</p>
           <ul data-editable>
             <li>Performed manual and exploratory testing using Squidler's AI-powered platform and the Qase test management system.</li>
@@ -90,10 +101,12 @@
         </article>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Full-Stack Developer (Internship)</h3>
+            <div>
+              <h3 data-editable>Full-Stack Developer (Internship)</h3>
+              <span class="entry-place" data-editable>ZoCom, Remote</span>
+            </div>
             <p class="dates" data-editable>Oct – Dec 2025</p>
           </div>
-          <p class="entry-place" data-editable>ZoCom, Remote</p>
           <p class="entry-description" data-editable>Developed ZoPlanner, a schedule management application for teachers that consolidates information about schedules, assignments, and availability into a dynamic and user-friendly interface.</p>
           <ul data-editable>
             <li>Worked in an agile team and contributed across the full stack: a Spring Boot API layer for database access, a .NET/C# service handling business logic, and a React frontend, all communicating over a Docker network with PostgreSQL.</li>
@@ -104,10 +117,12 @@
         </article>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Software Tester</h3>
+            <div>
+              <h3 data-editable>Software Tester</h3>
+              <span class="entry-place" data-editable>Quality Lab</span>
+            </div>
             <p class="dates" data-editable>Jul 2022 – Oct 2023</p>
           </div>
-          <p class="entry-place" data-editable>Quality Lab</p>
           <p class="entry-description" data-editable></p>
           <ul data-editable>
             <li>Conducted manual functional, regression, and exploratory testing across web and mobile platforms.</li>
@@ -118,10 +133,12 @@
         </article>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Administrator</h3>
+            <div>
+              <h3 data-editable>Administrator</h3>
+              <span class="entry-place" data-editable>Ariel Pole Studio AB, Malmö</span>
+            </div>
             <p class="dates" data-editable>Oct 2023 – Mar 2025</p>
           </div>
-          <p class="entry-place" data-editable>Ariel Pole Studio AB, Malmö</p>
           <p class="entry-description" data-editable></p>
           <ul data-editable>
             <li>Managed booking systems and maintained the website.</li>
@@ -135,10 +152,12 @@
         <h2 data-editable>Projects</h2>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Spira – Full-Stack Goal-Planning Platform</h3>
+            <div>
+              <h3 data-editable>Spira – Full-Stack Goal-Planning Platform</h3>
+            </div>
             <p class="dates" data-editable>2025 – Present</p>
           </div>
-          <p class="entry-place"><a href="https://github.com/alakhmakova/spira-mindscape" target="_blank" rel="noopener noreferrer" data-editable>github.com/alakhmakova/spira-mindscape</a></p>
+          <p class="entry-link"><a href="https://github.com/alakhmakova/spira-mindscape" target="_blank" rel="noopener noreferrer" data-editable>github.com/alakhmakova/spira-mindscape</a></p>
           <p class="entry-description" data-editable>A web and Android app that helps users plan and reach their goals with AI, based on the GROW coaching model. Personal side project.</p>
           <ul data-editable>
             <li>Defined a clear MVP scope and deployed the product entirely on my own: Spring Boot 3/Java backend built with Maven, PostgreSQL database (Spring Data JPA, Flyway migrations), and React 19/TypeScript frontend.</li>
@@ -154,10 +173,12 @@
         <h2 data-editable>Education</h2>
         <article data-block>
           <div class="entry-header">
-            <h3 data-editable>Systems Developer with Test Focus</h3>
+            <div>
+              <h3 data-editable>Systems Developer with Test Focus</h3>
+              <span class="entry-place" data-editable>JENSEN Yrkeshögskola, Malmö</span>
+            </div>
             <p class="dates" data-editable>Aug 2024 – May 2026</p>
           </div>
-          <p class="entry-place" data-editable>JENSEN Yrkeshögskola, Malmö</p>
           <p class="entry-description" data-editable></p>
           <ul data-editable>
             <li>Core understanding of OOP concepts; design, development, and testing of Java-based applications</li>
